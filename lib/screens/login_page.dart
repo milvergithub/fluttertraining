@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insurance/bloc/login_bloc.dart';
+import 'package:insurance/models/auth.dart';
 import 'package:insurance/screens/user_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -34,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   _showError(context, state.message);
                 }
                 if (state is LoggedLoginState) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => UserScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => UserPage()));
                 }
               }
             ),
@@ -45,11 +49,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
-                      decoration: InputDecoration(labelText: 'EMAIL'),
+                      decoration: InputDecoration(labelText: 'Email'),
                       controller: email,
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: 'PASSWORD'),
+                      decoration: InputDecoration(labelText: 'Password'),
                       controller: password,
                       obscureText: true,
                     ),
@@ -69,13 +73,14 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-   void _doLogin() {
-     BlocProvider.of<LoginBloc>(context).add(
-       DoLoginEvent(email.text, password.text),
-     );
-   }
 
-   void _showError(BuildContext context, String message) {
+  void _doLogin() {
+    BlocProvider.of<LoginBloc>(context).add(
+      DoLoginEvent(email.text, password.text),
+    );
+  }
+
+  void _showError(BuildContext context, String message) {
     Scaffold.of(context).showSnackBar(SnackBar(
       backgroundColor: Colors.redAccent.shade700,
       content: Text(message),

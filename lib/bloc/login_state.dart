@@ -18,7 +18,7 @@ class LoggedLoginState extends LoginState {
   final String token;
 
   LoggedLoginState(this.token);
-
+  String get getToken => this.token;
   @override
   List<Object> get props => [token];
 }

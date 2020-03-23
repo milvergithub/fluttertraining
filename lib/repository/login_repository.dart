@@ -12,7 +12,7 @@ class LocalAuthentication extends Authentication {
     if (username != "admin@admin.com" || password != "123456") {
       throw LoginException();
     }
-    return "token";
+    return "ej8jhTk7bh-yI9yccTHAbjy7bg6";
   }
 
   @override
