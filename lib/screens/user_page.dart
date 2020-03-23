@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insurance/bloc/user_bloc.dart';
 import 'package:insurance/providers/api_service.dart';
 import 'package:insurance/repository/users_repository.dart';
+import 'package:insurance/widget/user_list.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({Key key}) : super(key: key);
@@ -43,6 +44,7 @@ class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: MultiBlocListener(
@@ -63,18 +65,7 @@ class _UserScreenState extends State<UserScreen> {
                 );
               }
               if(state is UserLoadedState) {
-                return ListView.separated(
-                  padding: const EdgeInsets.all(1),
-                  itemCount: state.users.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      height: 50,
-                      color: Colors.amber,
-                      child: Center(child: Text(state.users[index].login)),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) => const Divider(),
-                ); 
+                return buildUserList(state.users); 
               }
               return Text('aaaaa');
             }
