@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:insurance/models/user.dart';
-import 'package:insurance/providers/user_api_client.dart';
+import 'package:insurance/providers/api_service.dart';
 
 class UserRepository {
-  final UserApiClient userApiClient;
+  final RestClient restClient;
 
-  UserRepository({@required this.userApiClient}) : assert(userApiClient != null);
+  UserRepository({@required this.restClient}) : assert(restClient != null);
 
   Future<List<User>> getUsers() async {
-    return await userApiClient.fetchUsers();
+    return await restClient.getUsers();
   }
 }

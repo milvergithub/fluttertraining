@@ -1,8 +1,9 @@
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insurance/bloc/user_bloc.dart';
-import 'package:insurance/providers/user_api_client.dart';
+import 'package:insurance/providers/api_service.dart';
 import 'package:insurance/repository/users_repository.dart';
 class UserPage extends StatelessWidget {
   const UserPage({Key key}) : super(key: key);
@@ -14,7 +15,7 @@ class UserPage extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider<UserBloc>(
-            create: (context) => UserBloc(userRepository: UserRepository(userApiClient: UserApiClient(httpClient: http.Client())))
+            create: (context) => UserBloc(userRepository: UserRepository(restClient: RestClient(Dio())))
           )
         ],
         child: UserScreen(),

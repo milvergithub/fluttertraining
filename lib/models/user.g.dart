@@ -1,19 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'role.dart';
+part of 'user.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Role _$RoleFromJson(Map<String, dynamic> json) {
-  return Role(
-    id: json['id'],
-    name: json['name'] as String,
-  );
+User _$UserFromJson(Map<String, dynamic> json) {
+  return User()
+    ..login = json['login'] as String
+    ..id = json['id'] as int;
 }
 
-Map<String, dynamic> _$RoleToJson(Role instance) => <String, dynamic>{
+Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+      'login': instance.login,
       'id': instance.id,
-      'name': instance.name,
     };
